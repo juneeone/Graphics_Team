@@ -129,7 +129,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd,HINS
 
 	// Initialize the model object.			Plane(바닥)
 	WCHAR stone[] = L"./data/GrassPatch.jpg";	//데이터 타입에 맞게끔 변수 선언 WCHAR
-	char plane[] = "./data/GrassPatch.txt";
+	char plane[] = "./data/Ground.txt";
 
 	result = m_Model->Initialize(m_D3D->GetDevice(), stone, plane);
 	if(!result)
@@ -147,6 +147,21 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd,HINS
 	WCHAR Cubetex[] = L"./data/wall.jpg";	//데이터 타입에 맞게끔 변수 선언 WCHAR
 	char CUBE[] = "./data/wall.txt";
 	result = m_CubeModel->Initialize(m_D3D->GetDevice(), Cubetex, CUBE);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+		return false;
+	}
+
+	//풀장식 모델
+	m_GrassModel = new ModelClass;
+	if (!m_GrassModel)
+	{
+		return false;
+	}
+	WCHAR Grasstex[] = L"./data/GrassPatch.jpg";	//데이터 타입에 맞게끔 변수 선언 WCHAR
+	char GRASS[] = "./data/GrassSeperate.txt";
+	result = m_GrassModel->Initialize(m_D3D->GetDevice(), Grasstex, GRASS);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -361,11 +376,26 @@ bool GraphicsClass::Render()
 	D3DXMATRIX PlaneScale, PlaneRot, PlaneMove;				//평면 매트릭스값들 = 여러번 선언하면 동시에 처리가 안되기 때문에 각각 별개로 선언하고 후에 world=planerot*planemove로 처리
 	D3DXMATRIX worldMatrix;											//Plane이 들어갈 월드 매트릭스
 
+	//외벽의 매트릭스
 	D3DXMATRIX Wall01_Scale, Wall01_Move;
 	D3DXMATRIX Wall02_Scale, Wall02_Move, Wall03_Scale, Wall03_Move, Wall04_Scale, Wall04_Move, Wall04_Rot;
 
+	D3DXMATRIX Wall01_Matrix, Wall02_Matrix, Wall03_Matrix, Wall04_Matrix; 
 
-	D3DXMATRIX Wall01_Matrix, Wall02_Matrix, Wall03_Matrix, Wall04_Matrix;				//첫번째 벽을 사용할 월드 매트릭스
+	//미로 내부의 가벽들의 매트릭스(세로)
+	D3DXMATRIX Miro01_Scale, Miro01_Move;
+	D3DXMATRIX Miro02_Scale, Miro02_Move, Miro03_Scale, Miro03_Move;
+
+	D3DXMATRIX Miro01_Matrix, Miro02_Matrix, Miro03_Matrix;
+
+	//미로 내부의 가벽들의 매트릭스(가로)
+	D3DXMATRIX Miro04_Scale, Miro04_Move;
+	D3DXMATRIX Miro05_Scale, Miro05_Move, Miro06_Scale, Miro06_Move;
+
+	D3DXMATRIX Miro04_Matrix, Miro05_Matrix, Miro06_Matrix;
+
+	//Grass 매트릭스
+	D3DXMATRIX GrassField01_Matrix, GrassField02_Matrix, GrassField01_Scale, GrassField01_Move, GrassField02_Scale, GrassField02_Move;
 
 	D3DXVECTOR4 diffuseColor[4];
 	D3DXVECTOR4 lightPosition[4];
@@ -411,8 +441,8 @@ bool GraphicsClass::Render()
 	}
 
 	//Wall02. 동쪽 외벽
-	D3DXMatrixTranslation(&Wall02_Move, 145.5f, -0.5f, 200.5f);				//위치	
-	D3DXMatrixScaling(&Wall02_Scale, 10.0f, 20.0f, 300.0f);					//크기
+	D3DXMatrixTranslation(&Wall02_Move, 145.5f, -0.5f, 165.5f);				//위치	
+	D3DXMatrixScaling(&Wall02_Scale, 10.0f, 20.0f, 225.0f);					//크기
 
 	Wall02_Matrix = Wall02_Scale * Wall02_Move;										//매트릭스 = 크기 * 위치. 정보를 한번에 담기 위함
 	m_CubeModel->Render(m_D3D->GetDeviceContext());
@@ -455,12 +485,121 @@ bool GraphicsClass::Render()
 		return false;
 	}
 
-	//Plane. WorldMatrix=바닥 오브젝트
-	D3DXMatrixScaling(&PlaneScale, 1.0f, 1.0f, 1.0f);		//보여지는 오브젝트의 크기를 조절하기 위함인 것.	
-	D3DXMatrixRotationX(&PlaneRot, D3DXToRadian(90.0));		//(바꿀 오브젝트의 매트릭스, 회전값을 준 변수)
-	D3DXMatrixTranslation(&PlaneMove, 0.0f, -20.0f, 200.0f);
+	/* 가벽(세로) */
+	//Miro01. 가벽
+	D3DXMatrixTranslation(&Miro01_Move, -75.0f, -0.5f, 300.5f);		//위치
+	D3DXMatrixScaling(&Miro01_Scale, 10.0f, 20.0f, 100.0f);				//크기
 
-	worldMatrix = PlaneScale * PlaneRot * PlaneMove;
+	Miro01_Matrix = Miro01_Scale * Miro01_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro01_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	//Miro02. 가벽
+	D3DXMatrixTranslation(&Miro02_Move, 0.0f, -0.5f, 150.5f);		//위치
+	D3DXMatrixScaling(&Miro02_Scale, 10.0f, 20.0f, 200.0f);				//크기
+
+	Miro02_Matrix = Miro02_Scale * Miro02_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro02_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	//Miro03. 가벽
+	D3DXMatrixTranslation(&Miro03_Move, 75.0f, -0.5f, 265.5f);		//위치
+	D3DXMatrixScaling(&Miro03_Scale, 10.0f, 20.0f, 175.0f);				//크기
+
+	Miro03_Matrix = Miro03_Scale * Miro03_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro03_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	/* 가벽(가로) */
+	//Miro04. 가벽
+	D3DXMatrixTranslation(&Miro04_Move, -105.0f, -5.5f, 105.5f);		//위치
+	D3DXMatrixScaling(&Miro04_Scale, 70.0f, 30.0f, 10.0f);				//크기
+
+	Miro04_Matrix = Miro04_Scale * Miro04_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro04_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	//Miro05. 가벽
+	D3DXMatrixTranslation(&Miro05_Move, -40.0f, -5.5f, 180.5f);		//위치
+	D3DXMatrixScaling(&Miro05_Scale, 72.5f, 30.0f, 10.0f);				//크기
+
+	Miro05_Matrix = Miro05_Scale * Miro05_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro05_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	//Miro06. 가벽
+	D3DXMatrixTranslation(&Miro06_Move, 105.0f, -5.5f, 105.5f);		//위치
+	D3DXMatrixScaling(&Miro06_Scale, 70.0f, 30.0f, 10.0f);				//크기
+
+	Miro06_Matrix = Miro06_Scale * Miro06_Move;
+	m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro06_Matrix, viewMatrix, projectionMatrix,
+		m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	////Miro06. 가벽. 기준점을 잡기 위한 더미
+	//D3DXMatrixTranslation(&Miro06_Move, 75.0f, -5.5f, 255.5f);		//위치
+	//D3DXMatrixScaling(&Miro06_Scale, 300.0f, 5.0f, 10.0f);				//크기
+
+	//Miro06_Matrix = Miro06_Scale * Miro06_Move;
+	//m_CubeModel->Render(m_D3D->GetDeviceContext());
+
+	//result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), Miro06_Matrix, viewMatrix, projectionMatrix,
+	//	m_CubeModel->GetTexture(), diffuseColor, lightPosition);
+
+	//if (!result)
+	//{
+	//	return false;
+	//}
+
+	//Plane. WorldMatrix=바닥 오브젝트
+	D3DXMatrixScaling(&PlaneScale, 6.0f, 6.0f, 6.0f);		//보여지는 오브젝트의 크기를 조절하기 위함인 것.	
+	D3DXMatrixRotationX(&PlaneRot, D3DXToRadian(90.0));		//(바꿀 오브젝트의 매트릭스, 회전값을 준 변수)
+	D3DXMatrixTranslation(&PlaneMove, 0.0f, -15.0f, 200.0f);
+
+	//worldMatrix = PlaneScale * PlaneRot * PlaneMove; //원본상태
+
+	worldMatrix = PlaneScale * PlaneMove;
 
 	//Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	m_Model->Render(m_D3D->GetDeviceContext());
@@ -472,6 +611,50 @@ bool GraphicsClass::Render()
 	{
 		return false;
 	}
+
+	/*Grass*/
+	////Grass.원본 정가운데 위치
+	//D3DXMatrixScaling(&GrassField01_Scale, 2.0f, 0.5f, 2.0f);		//보여지는 오브젝트의 크기를 조절하기 위함인 것.	
+	//D3DXMatrixTranslation(&GrassField01_Move, 0.0f, -10.0f, 200.0f);
+	//GrassField01_Matrix = GrassField01_Scale * GrassField01_Move;
+
+	//m_GrassModel->Render(m_D3D->GetDeviceContext());
+
+	//result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_GrassModel->GetIndexCount(), GrassField01_Matrix, viewMatrix, projectionMatrix,
+	//	m_GrassModel->GetTexture(), diffuseColor, lightPosition);
+	//if (!result)
+	//{
+	//	return false;
+	//}
+
+	//Grass01.
+	D3DXMatrixScaling(&GrassField01_Scale, 2.0f, 0.5f, 0.5f);		//보여지는 오브젝트의 크기를 조절하기 위함인 것.	
+	D3DXMatrixTranslation(&GrassField01_Move, -100.0f, -10.0f, 75.0f);
+	GrassField01_Matrix = GrassField01_Scale * GrassField01_Move;
+
+	m_GrassModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_GrassModel->GetIndexCount(), GrassField01_Matrix, viewMatrix, projectionMatrix,
+		m_GrassModel->GetTexture(), diffuseColor, lightPosition);
+	if (!result)
+	{
+		return false;
+	}
+
+	//Grass02.
+	D3DXMatrixScaling(&GrassField02_Scale, 1.0f, 0.5f, 1.0f);		//보여지는 오브젝트의 크기를 조절하기 위함인 것.	
+	D3DXMatrixTranslation(&GrassField02_Move, 100.0f, -10.0f, 100.0f);
+	GrassField02_Matrix = GrassField02_Scale * GrassField02_Move;
+
+	m_GrassModel->Render(m_D3D->GetDeviceContext());
+
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_GrassModel->GetIndexCount(), GrassField02_Matrix, viewMatrix, projectionMatrix,
+		m_GrassModel->GetTexture(), diffuseColor, lightPosition);
+	if (!result)
+	{
+		return false;
+	}
+
 
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();

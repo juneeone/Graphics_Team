@@ -58,6 +58,7 @@ private:
 	CameraClass* m_Camera;
 	ModelClass* m_Model;
 	ModelClass* m_CubeModel;
+	ModelClass* m_GrassModel;
 	LightShaderClass* m_LightShader;
 	LightClass *m_Light1, *m_Light2, *m_Light3, *m_Light4;
 

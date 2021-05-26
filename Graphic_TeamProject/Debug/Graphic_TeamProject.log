@@ -1,5 +1,5 @@
 ﻿  graphicsclass.cpp
 D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\graphicsclass.cpp(86,24): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\graphicsclass.cpp(87,26): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\graphicsclass.cpp(460,51): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\graphicsclass.cpp(597,51): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
   Graphic_TeamProject.vcxproj -> D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Debug\Graphic_TeamProject.exe
