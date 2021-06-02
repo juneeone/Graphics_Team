@@ -57,7 +57,7 @@ public:
 
 private:
 	bool m_vsync_enabled;
-	
+	//videocarmemory
 	IDXGISwapChain* m_swapChain;
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;

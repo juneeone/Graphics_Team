@@ -1,0 +1,29 @@
+﻿  cameraclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\cameraclass.h(11,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  d3dclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  graphicsclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  inputclass.cpp
+  lightclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\lightclass.h(11,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  lightshaderclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\lightshaderclass.h(18,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  main.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  modelclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\modelclass.h(12,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  positionclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  systemclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  textureclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\textureclass.h(12,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx11tex.h': No such file or directory
+  TimerClass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  Skydome.cpp
+  BitmapClass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\d3dclass.h(23,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  textureshaderclass.cpp
+D:\대학 2020\게임 그래픽스 실습\Graphics_Team-master (3)\Graphics_Team-master\Graphic_TeamProject\textureshaderclass.h(13,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+  코드를 생성하고 있습니다...

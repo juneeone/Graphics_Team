@@ -154,6 +154,9 @@
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="TimerClass.h" />
+    <ClInclude Include="Skydome.h" />
+    <ClInclude Include="BitmapClass.h" />
+    <ClInclude Include="textureshaderclass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
@@ -168,8 +171,13 @@
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="TimerClass.cpp" />
+    <ClCompile Include="Skydome.cpp" />
+    <ClCompile Include="BitmapClass.cpp" />
+    <ClCompile Include="textureshaderclass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\texture.ps" />
+    <None Include="data\texture.vs" />
     <None Include="light.ps" />
     <None Include="light.vs" />
   </ItemGroup>

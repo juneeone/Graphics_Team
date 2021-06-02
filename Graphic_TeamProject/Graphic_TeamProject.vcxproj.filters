@@ -51,6 +51,15 @@
     <ClInclude Include="stdafx.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Skydome.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -89,6 +98,15 @@
     <ClCompile Include="TimerClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Skydome.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="textureshaderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="light.ps">
@@ -97,12 +115,15 @@
     <None Include="light.vs">
       <Filter>소스 파일</Filter>
     </None>
+    <None Include="data\texture.ps">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="data\texture.vs">
+      <Filter>소스 파일</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\chair_d.dds">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="data\seafloor.dds">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="data\stone01.dds">
@@ -113,6 +134,9 @@
     </Image>
     <Image Include="data\GrassPatch.jpg">
       <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="data\seafloor.dds">
+      <Filter>소스 파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

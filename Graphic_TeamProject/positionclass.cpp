@@ -102,7 +102,7 @@ void PositionClass::MoveLeft(bool keydown)
 	float radians = m_rotation.y * 0.0174532925f;
 	// 높이 위치를 업데이트 합니다.
 	m_position.x -= cosf(radians) * m_moveleftSpeed;
-	m_position.z -= sinf(radians) * m_moveleftSpeed;
+	m_position.z += sinf(radians) * m_moveleftSpeed;
 }
 
 void PositionClass::MoveRight(bool keydown)
@@ -130,7 +130,7 @@ void PositionClass::MoveRight(bool keydown)
 	float radians = m_rotation.y * 0.0174532925f;
 
 	m_position.x += cosf(radians) * m_moverightSpeed;
-	m_position.z += sinf(radians) * m_moverightSpeed;
+	m_position.z -= sinf(radians) * m_moverightSpeed;
 }
 
 void PositionClass::MoveBackward(bool keydown)
